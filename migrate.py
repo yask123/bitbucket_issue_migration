@@ -119,7 +119,7 @@ Original comment by: {}
 """.format(
         comment['body'],
         '-' * 40,
-        comment['user'].encode('utf-8')
+        comment['user'].encode('ascii')
     )
 
 
@@ -150,6 +150,7 @@ def get_issues(bb_url, start_id):
     '''
     Fetch the issues from Bitbucket
     '''
+    print bb_url
     issues = []
 
     while True:
@@ -275,11 +276,11 @@ def push_issue(gh_username, gh_repository, issue, body, comments):
 
 if __name__ == "__main__":
     options = read_arguments()
-    bb_url = "https://api.bitbucket.org/1.0/repositories/{}/{}/issues".format(
+    bb_url = "https://bitbucket.org/api/1.0/repositories/{}/{}/issues".format(
         options.bitbucket_username,
         options.bitbucket_repo
     )
-
+    #https://bitbucket.org/api/1.0/repositories/yask123/moin-2.0/issues/?sort=kind
     # fetch issues from Bitbucket
     issues = get_issues(bb_url, options.start)
 
